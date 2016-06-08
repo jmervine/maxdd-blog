@@ -3,9 +3,7 @@ var maxKey    = process.env.MAXCDN_KEY;
 var maxSecret = process.env.MAXCDN_SECRET;
 
 var async   = require('async');
-var MaxCDN  = require('maxcdn');
-
-var maxcdn  = new MaxCDN(maxAlias, maxKey, maxSecret);
+var maxcdn  = require('maxcdn').create(maxAlias, maxKey, maxSecret);
 
 function maxcdnStats(callback) {
     var endpoint = 'reports/stats.json/hourly';
@@ -23,5 +21,5 @@ function maxcdnStats(callback) {
 async.parallel({
   status: maxcdnStats
 }, function(err, results) {
-  console.dir(results.stats.data);
+  console.dir(results.status);
 });
