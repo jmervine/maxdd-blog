@@ -5,6 +5,8 @@ var maxSecret = process.env.MAXCDN_SECRET;
 var async   = require('async');
 var MaxCDN  = require('maxcdn');
 
+var maxcdn  = new MaxCDN(maxAlias, maxKey, maxSecret);
+
 function maxcdnStats(callback) {
     var endpoint = 'reports/stats.json/hourly';
     console.log('==> Fetching maxcdn stats payload from:', endpoint);
