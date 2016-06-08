@@ -18,5 +18,5 @@ jmervine@laptop:~/tmp $ MAXCDN_ALIAS=XXXXX MAXCDN_KEY=XXXXX MAXCDN_SECRET=XXXXX 
   stats: 
    { size: '10362832',
      hit: '16211',
-     noncache_hit: '16211',
-     cache_hit: '0' } }
+     noncache_hit: '0',
+     cache_hit: '16211' } }

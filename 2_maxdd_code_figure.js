@@ -1,10 +1,14 @@
+var async   = require('async');
+
+// MaxCDN Credentials
 var maxAlias  = process.env.MAXCDN_ALIAS;
 var maxKey    = process.env.MAXCDN_KEY;
 var maxSecret = process.env.MAXCDN_SECRET;
 
-var async   = require('async');
+// Initialize MaxCDN lib
 var maxcdn  = require('maxcdn').create(maxAlias, maxKey, maxSecret);
 
+// Fetch MaxCDN stats information
 function maxcdnStats(callback) {
     // Set endpoint
     var endpoint = 'reports/stats.json/hourly';
@@ -25,6 +29,7 @@ function maxcdnStats(callback) {
     });
 }
 
+// Fetch MaxCDN status information
 function maxcdnStatus(callback) {
     // Set endpoint
     var endpoint = 'reports/statuscodes.json/daily';
@@ -51,3 +56,4 @@ async.parallel({
 }, function(err, results) {
   console.dir(results);
 });
+

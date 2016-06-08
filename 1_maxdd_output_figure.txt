@@ -1,6 +1,7 @@
 jmervine@laptop:~/tmp $ MAXCDN_ALIAS=XXXXX MAXCDN_KEY=XXXXX MAXCDN_SECRET=XXXXX node maxdd.js
 ==> Fetching maxcdn stats payload from: reports/stats.json/hourly
-{ size: '10362832',
-  hit: '16211',
-  noncache_hit: '0',
-  cache_hit: '16211' }
+{ stats: 
+   { size: '10362832',
+     hit: '16211',
+     noncache_hit: '0',
+     cache_hit: '16211' } }
