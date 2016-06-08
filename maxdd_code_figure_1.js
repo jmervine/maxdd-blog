@@ -19,7 +19,7 @@ function maxcdnStats(callback) {
 }
 
 async.parallel({
-  status: maxcdnStats
+  stats: maxcdnStats
 }, function(err, results) {
-  console.dir(results.status);
+  console.dir(results.stats);
 });
