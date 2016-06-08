@@ -1,0 +1,22 @@
+jmervine@laptop:~/tmp $ MAXCDN_ALIAS=XXXXX MAXCDN_KEY=XXXXX MAXCDN_SECRET=XXXXX node maxdd.js
+==> Fetching maxcdn stats payload from: reports/stats.json/hourly
+==> Fetching maxcdn status codes payload from: reports/statuscodes.json/daily
+{ status: 
+   [ { status_code: '301',
+       hit: '274',
+       definition: 'Moved Permanently',
+       timestamp: '2016-05-08' },
+     { status_code: '404',
+       hit: '1',
+       definition: 'Not Found',
+       timestamp: '2016-05-08' },
+   // ... results omitted for brevity ...
+     { status_code: '301',
+       hit: '479',
+       definition: 'Moved Permanently',
+       timestamp: '2016-05-27' } ],
+  stats: 
+   { size: '10362832',
+     hit: '16211',
+     noncache_hit: '16211',
+     cache_hit: '0' } }
