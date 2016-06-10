@@ -17,9 +17,6 @@ function maxcdnStats(callback) {
     // Set endpoint
     var endpoint = 'reports/stats.json/hourly';
 
-    // Log request
-    console.log('==> Fetching maxcdn stats payload from:', endpoint);
-
     // Submit request
     maxcdn.get(endpoint, function(error, results) {
         // Handle errors
@@ -38,9 +35,6 @@ function maxcdnStatus(callback) {
     // Set endpoint
     var endpoint = 'reports/statuscodes.json/daily';
 
-    // Log request
-    console.log('==> Fetching maxcdn status codes payload from:', endpoint);
-
     // Submit request
     maxcdn.get(endpoint, function(error, results) {
         // Handle errors
@@ -56,9 +50,6 @@ function maxcdnStatus(callback) {
 
 // Helper to format the metrics result set from MaxCDN for sending to Datadog
 function formatMetrics(results) {
-    // Log action
-    console.log('==> Formatted maxcdn results');
-
     // Convert strings to integers
     cacheSize = parseInt(results.stats.size, 10);
     cacheHit  = parseInt(results.stats.cache_hit, 10);

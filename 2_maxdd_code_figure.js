@@ -11,9 +11,6 @@ function maxcdnStats(callback) {
     // Set endpoint
     var endpoint = 'reports/stats.json/hourly';
 
-    // Log request
-    console.log('==> Fetching maxcdn stats payload from:', endpoint);
-
     // Submit request
     maxcdn.get(endpoint, function(error, results) {
         // Handle errors
@@ -31,9 +28,6 @@ function maxcdnStats(callback) {
 function maxcdnStatus(callback) {
     // Set endpoint
     var endpoint = 'reports/statuscodes.json/daily';
-
-    // Log request
-    console.log('==> Fetching maxcdn status codes payload from:', endpoint);
 
     // Submit request
     maxcdn.get(endpoint, function(error, results) {

@@ -1,6 +1,4 @@
 jmervine@laptop:~/tmp $ MAXCDN_ALIAS=XXXXX MAXCDN_KEY=XXXXX MAXCDN_SECRET=XXXXX node maxdd.js
-==> Fetching maxcdn stats payload from: reports/stats.json/hourly
-==> Fetching maxcdn status codes payload from: reports/statuscodes.json/daily
 { status: 
    [ { status_code: '301',
        hit: '0',
