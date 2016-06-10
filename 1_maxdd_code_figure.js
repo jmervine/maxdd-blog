@@ -1,12 +1,10 @@
 var async   = require('async');
 
-// MaxCDN Credentials
-var maxAlias  = process.env.MAXCDN_ALIAS;
-var maxKey    = process.env.MAXCDN_KEY;
-var maxSecret = process.env.MAXCDN_SECRET;
-
 // Initialize MaxCDN lib
-var maxcdn  = require('maxcdn').create(maxAlias, maxKey, maxSecret);
+var maxcdn  = require('maxcdn').create(
+    process.env.MAXCDN_ALIAS,
+    process.env.MAXCDN_KEY,
+    process.env.MAXCDN_SECRET);
 
 // Fetch MaxCDN stats information
 function maxcdnStats(callback) {
