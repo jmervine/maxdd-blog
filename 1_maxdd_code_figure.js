@@ -28,8 +28,8 @@ function maxcdnStats(callback) {
 }
 
 async.parallel({
-  stats:  maxcdnStats
+    stats:  maxcdnStats
 }, function(err, results) {
-  console.dir(results);
+    console.dir(results);
 });
 

@@ -49,9 +49,9 @@ function maxcdnStatus(callback) {
 }
 
 async.parallel({
-  stats:  maxcdnStats,
-  status: maxcdnStatus
+    stats:  maxcdnStats,
+    status: maxcdnStatus
 }, function(err, results) {
-  console.dir(results);
+    console.dir(results);
 });
 
