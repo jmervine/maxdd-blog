@@ -65,7 +65,7 @@ function formatMetrics(results) {
 
     // Generate initial metrics payload with basic stats information
     var metrics = [
-        { metric: "maxcdn.cache_bites",       points: cacheSize },
+        { metric: "maxcdn.cache_bytes",       points: cacheSize },
         { metric: "maxcdn.cache_hits" ,       points: cacheHit },
         { metric: "maxcdn.cache_misses",      points: cacheMiss },
         { metric: "maxcdn.cache_hit_percent", points: cacheHitPercent }
