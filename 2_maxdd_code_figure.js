@@ -27,7 +27,7 @@ function maxcdnStats(callback) {
 // Fetch MaxCDN status information
 function maxcdnStatus(callback) {
     // Set endpoint
-    var endpoint = 'reports/statuscodes.json/daily';
+    var endpoint = 'reports/statuscodes.json/hourly';
 
     // Submit request
     maxcdn.get(endpoint, function(error, results) {

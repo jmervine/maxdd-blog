@@ -1,0 +1,9 @@
+jmervine@laptop:~/tmp $ MAXCDN_ALIAS=XXXXX MAXCDN_KEY=XXXXX MAXCDN_SECRET=XXXXX DATADOG_API_KEY=XXXXX DATADOG_APP_KEY=XXXXX node maxdd.js
+[ { metric: 'maxcdn.cache_bytes', points: 10363556 },
+  { metric: 'maxcdn.cache_hits', points: 0 },
+  { metric: 'maxcdn.cache_misses', points: 0 },
+  { metric: 'maxcdn.cache_hit_percent', points: 16694 },
+  { metric: 'maxcdn.2xx_count', points: 16684 },
+  { metric: 'maxcdn.3xx_count', points: 0 },
+  { metric: 'maxcdn.4xx_count', points: 9 },
+  { metric: 'maxcdn.5xx_count', points: 1 } ]

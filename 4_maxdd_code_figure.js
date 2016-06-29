@@ -6,12 +6,6 @@ var maxcdn  = require('maxcdn').create(
     process.env.MAXCDN_KEY,
     process.env.MAXCDN_SECRET);
 
-// Initialize Datadog lib
-var datadog = require("dogapi").initialize({
-    api_key: process.env.DATADOG_API_KEY,
-    app_key: process.env.DATADOG_APP_KEY
-});
-
 // Fetch MaxCDN stats information
 function maxcdnStats(callback) {
     // Set endpoint
@@ -33,7 +27,7 @@ function maxcdnStats(callback) {
 // Fetch MaxCDN status information
 function maxcdnStatus(callback) {
     // Set endpoint
-    var endpoint = 'reports/statuscodes.json/daily';
+    var endpoint = 'reports/statuscodes.json/hourly';
 
     // Submit request
     maxcdn.get(endpoint, function(error, results) {
@@ -64,11 +58,12 @@ function formatMetrics(results) {
     }
 
     // Generate initial metrics payload with basic stats information
+    var now = parseInt(new Date().getTime() / 1000);
     var metrics = [
-        { metric: "maxcdn.cache_bytes",       points: cacheSize },
-        { metric: "maxcdn.cache_hits" ,       points: cacheHit },
-        { metric: "maxcdn.cache_misses",      points: cacheMiss },
-        { metric: "maxcdn.cache_hit_percent", points: cacheHitPercent }
+        { metric: "maxcdn.cache_bytes",       points: [[ now, cacheSize ]]},
+        { metric: "maxcdn.cache_hits" ,       points: [[ now, cacheHit ]]},
+        { metric: "maxcdn.cache_misses",      points: [[ now, cacheMiss ]]},
+        { metric: "maxcdn.cache_hit_percent", points: [[ now, cacheHitPercent ]]}
     ];
 
     // Insert status code metrics in to metrics payload
@@ -96,5 +91,28 @@ async.parallel({
     status: maxcdnStatus
 }, function(err, results) {
     var metrics = formatMetrics(results);
-    console.dir(metrics);
+
+    // Initialize Datadog lib
+    var datadog = require("dogapi");
+
+    datadog.initialize({
+        api_key: process.env.DATADOG_API_KEY,
+        app_key: process.env.DATADOG_APP_KEY
+    });
+
+    datadog.metric.send_all(metrics, function(err, data, code) {
+        // Log and abort on error
+        if (err) {
+            console.log("ERROR:", err);
+            process.exit(1);
+        }
+
+        console.dir(data);
+
+        // Log and abort on bad status code
+        if (code > 299) {
+            console.log("ERROR: Invalid response code (%s) from datadog!", code);
+            process.exit(1);
+        }
+    });
 });
