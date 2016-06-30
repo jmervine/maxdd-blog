@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var async   = require('async');
 
 // Initialize MaxCDN lib
@@ -19,8 +20,8 @@ function maxcdnStats(callback) {
             process.exit(error.statusCode);
         }
 
-        // Return data
-        callback(undefined, results.data.summary);
+        // Return last hour of data
+        callback(undefined, results.data.stats.pop());
     });
 }
 

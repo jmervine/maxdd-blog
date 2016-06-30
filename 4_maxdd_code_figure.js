@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var async   = require('async');
 
 // Initialize MaxCDN lib
@@ -19,8 +20,8 @@ function maxcdnStats(callback) {
             process.exit(error.statusCode);
         }
 
-        // Return data
-        callback(undefined, results.data.summary);
+        // Return last hour of data
+        callback(undefined, results.data.stats.pop());
     });
 }
 
@@ -44,37 +45,40 @@ function maxcdnStatus(callback) {
 
 // Helper to format the metrics result set from MaxCDN for sending to Datadog
 function formatMetrics(results) {
+    var now = parseInt(new Date().getTime() / 1000);
+
     // Convert strings to integers
-    cacheSize = parseInt(results.stats.size, 10);
-    cacheHit  = parseInt(results.stats.cache_hit, 10);
-    cacheMiss = parseInt(results.stats.noncache_hit, 10);
+    bytes    = parseInt(results.stats.size, 10);
+    requests = parseInt(results.stats.hit, 10);
+    hits     = parseInt(results.stats.cache_hit, 10);
+    misses   = parseInt(results.stats.noncache_hit, 10);
 
     // Calculate cache hit percentage
-    cacheHitPercent = ((cacheHit / cacheMiss) * 100.0);
+    hitPercent = hits / requests * 100;
 
     // Ensure cache hit percentage is valid
-    if (cacheHitPercent === NaN) {
-        cacheHitPercent = 0;
+    if (hitPercent === NaN) {
+        hitPercent = 0;
     }
 
     // Generate initial metrics payload with basic stats information
-    var now = parseInt(new Date().getTime() / 1000);
     var metrics = [
-        { metric: "maxcdn.cache_bytes",       points: [[ now, cacheSize ]]},
-        { metric: "maxcdn.cache_hits" ,       points: [[ now, cacheHit ]]},
-        { metric: "maxcdn.cache_misses",      points: [[ now, cacheMiss ]]},
-        { metric: "maxcdn.cache_hit_percent", points: [[ now, cacheHitPercent ]]}
+        { metric: "maxcdn.bytes",       points: [[ now, bytes ]]},
+        { metric: "maxcdn.requests" ,   points: [[ now, requests ]]},
+        { metric: "maxcdn.hits" ,       points: [[ now, hits ]]},
+        { metric: "maxcdn.misses",      points: [[ now, misses ]]},
+        { metric: "maxcdn.hit_percent", points: [[ now, hitPercent ]]}
     ];
 
     // Insert status code metrics in to metrics payload
     [ "2", "3", "4", "5" ].forEach(function(n) {
         var name = "maxcdn." + n + "xx_count";
-        var dataset = { metric: name, points: 0 };
+        var dataset = { metric: name, points: [[ now, 0 ]] };
 
         // Group similar status codes in to dataset defined above
         results.status.forEach(function(status) {
             if (status.status_code.startsWith(n)) {
-                dataset.points += parseInt(status.hit, 10);
+                dataset.points[0][1] += parseInt(status.hit, 10);
             }
         });
 
