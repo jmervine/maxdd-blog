@@ -7,10 +7,12 @@ var maxcdn  = require('maxcdn').create(
     process.env.MAXCDN_KEY,
     process.env.MAXCDN_SECRET);
 
+var maxZone = process.env.MAXCDN_ZONE;
+
 // Fetch MaxCDN stats information
 function maxcdnStats(callback) {
     // Set endpoint
-    var endpoint = 'reports/stats.json/hourly';
+    var endpoint = 'reports/' + maxZone + '/stats.json/hourly';
 
     // Submit request
     maxcdn.get(endpoint, function(error, results) {
