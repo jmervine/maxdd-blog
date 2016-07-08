@@ -1,0 +1,27 @@
+{
+    "name": "MaxCDN / Datadog integration",
+    "env": {
+        "MAXCDN_ALIAS": {
+            "required": true
+        },
+        "MAXCDN_KEY": {
+            "required": true
+        },
+        "MAXCDN_SECRET": {
+            "required": true
+        },
+        "MAXCDN_ZONE": {
+            "required": true
+        },
+        "DATADOG_API_KEY": {
+            "required": true
+        },
+        "DATADOG_APP_KEY": {
+            "required": true
+        }
+    },
+    "addons": [ "scheduler:standard" ],
+    "buildpacks": [
+        { "url": "https://github.com/hone/heroku-buildpack-static" }
+    ]
+}
