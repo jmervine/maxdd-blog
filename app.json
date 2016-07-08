@@ -22,7 +22,7 @@
     },
     "addons": [ "scheduler:standard" ],
     "buildpacks": [
+        { "url": "https://github.com/heroku/heroku-buildpack-nodejs" },
         { "url": "https://github.com/heroku/heroku-buildpack-static" }
-        { "url": "https://github.com/heroku/heroku-buildpack-nodejs" }
     ]
 }
