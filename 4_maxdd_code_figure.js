@@ -23,7 +23,7 @@ function maxcdnStats(callback) {
         }
 
         // Return data
-        callback(undefined, results.data.summary);
+        callback(undefined, results.data.stats.pop());
     });
 }
 
