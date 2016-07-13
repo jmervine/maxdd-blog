@@ -23,7 +23,7 @@ function maxcdnStats(callback) {
         }
 
         // Return last hour of data
-        callback(undefined, results.data.stats.pop());
+        callback(undefined, results.data.stats.shift());
     });
 }
 
