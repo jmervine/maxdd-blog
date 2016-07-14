@@ -1,35 +1,22 @@
 #!/usr/bin/env node
-var async   = require('async');
+const maxZone = process.env.MAXCDN_ZONE;
+const endpoint = 'reports/' + maxZone + '/stats.json/hourly';
 
 // Initialize MaxCDN lib
-var maxcdn  = require('maxcdn').create(
+const maxcdn  = require('maxcdn').create(
     process.env.MAXCDN_ALIAS,
     process.env.MAXCDN_KEY,
     process.env.MAXCDN_SECRET);
 
-var maxZone = process.env.MAXCDN_ZONE;
+// Exec
+maxcdn.get(endpoint, function(error, results) {
+    var onError = function(error) {
+        console.log('    ERROR: s', error.data);
+        process.exit(error.statusCode);
+    }
 
-// Fetch MaxCDN stats information
-function maxcdnStats(callback) {
-    // Set endpoint
-    var endpoint = 'reports/' + maxZone + '/stats.json/hourly';
+    if (error)
+        return onError(error);
 
-    // Submit request
-    maxcdn.get(endpoint, function(error, results) {
-        // Handle errors
-        if (error) {
-            console.log('    ERROR: s', error.data);
-            process.exit(error.statusCode);
-        }
-
-        // Return last hour of data
-        callback(undefined, results.data.stats.shift());
-    });
-}
-
-async.parallel({
-    stats:  maxcdnStats
-}, function(err, results) {
-    console.dir(results);
+    console.dir(results.data);
 });
-
