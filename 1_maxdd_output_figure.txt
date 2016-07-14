@@ -10,7 +10,7 @@ jmervine@laptop:~/tmp $ MAXCDN_ALIAS=XXXXX MAXCDN_KEY=XXXXX MAXCDN_SECRET=XXXXX 
        noncache_hit: '245454',
        cache_hit: '70489713',
        timestamp: '2016-06-14 00:00:00' },
-       // ommited...
+   // ... results omitted for brevity ...
      { size: '1867865128976',
        hit: '70481301',
        noncache_hit: '224253',
