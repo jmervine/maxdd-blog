@@ -1,54 +1,40 @@
 #!/usr/bin/env node
-var async   = require('async');
+const maxZone = process.env.MAXCDN_ZONE;
+const endpoint = 'reports/' + maxZone + '/stats.json/hourly';
 
 // Initialize MaxCDN lib
-var maxcdn  = require('maxcdn').create(
+const maxcdn  = require('maxcdn').create(
     process.env.MAXCDN_ALIAS,
     process.env.MAXCDN_KEY,
     process.env.MAXCDN_SECRET);
 
-var maxZone = process.env.MAXCDN_ZONE;
+// Initialize Datadog lib
+const datadog = require("dogapi");
 
-// Fetch MaxCDN stats information
-function maxcdnStats(callback) {
-    // Set endpoint
-    var endpoint = 'reports/' + maxZone + '/stats.json/hourly';
-
-    // Submit request
-    maxcdn.get(endpoint, function(error, results) {
-        // Handle errors
-        if (error) {
-            console.log('    ERROR: s', error.data);
-            process.exit(error.statusCode);
-        }
-
-        // Return data
-        callback(undefined, results.data.stats.shift());
-    });
-}
-
-// Fetch MaxCDN status information
-function maxcdnStatus(callback) {
-    // Set endpoint
-    var endpoint = 'reports/' + maxZone + '/statuscodes.json/daily';
-
-    // Submit request
-    maxcdn.get(endpoint, function(error, results) {
-        // Handle errors
-        if (error) {
-            console.log('    ERROR: s', error.data);
-            process.exit(error.statusCode);
-        }
-
-        // Retrun data
-        callback(undefined, results.data.statuscodes);
-    });
-}
-
-async.parallel({
-    stats:  maxcdnStats,
-    status: maxcdnStatus
-}, function(err, results) {
-    console.dir(results);
+datadog.initialize({
+    api_key: process.env.DATADOG_API_KEY,
+    app_key: process.env.DATADOG_APP_KEY
 });
 
+// Exec
+maxcdn.get(endpoint, function(error, results) {
+    var onError = function(error) {
+        console.log('    ERROR: s', error.data);
+        process.exit(error.statusCode);
+    }
+
+    if (error)
+        return onError(error);
+
+    // Handle pagination
+    if (results.data.page === results.data.pages)
+        console.dir(results.data.stats.shift());
+
+    // Request status from the last page of data
+    maxcdn.get(endpoint + '?page=' + results.data.pages, function(error, results) {
+        if (error)
+            return onError(error);
+
+        console.dir(results.data.stats.shift());
+    });
+});

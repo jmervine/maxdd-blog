@@ -1,6 +1,24 @@
 jmervine@laptop:~/tmp $ MAXCDN_ALIAS=XXXXX MAXCDN_KEY=XXXXX MAXCDN_SECRET=XXXXX node maxdd.js
-{ stats: 
-   { size: '10362832',
-     hit: '16211',
-     noncache_hit: '0',
-     cache_hit: '16211' } }
+{ page: 1,
+  pages: 15,
+  page_size: 50,
+  current_page_size: 50,
+  total: '741',
+  stats:
+   [ { size: '1872684732139',
+       hit: '70735167',
+       noncache_hit: '245454',
+       cache_hit: '70489713',
+       timestamp: '2016-06-14 00:00:00' },
+   // ... results omitted for brevity ...
+     { size: '1867865128976',
+       hit: '70481301',
+       noncache_hit: '224253',
+       cache_hit: '70257048',
+       timestamp: '2016-06-16 01:00:00' } ],
+  summary:
+   { size: '1471217376300301',
+     hit: '56607422415',
+     noncache_hit: '195796301',
+     cache_hit: '56411626114' } }
+

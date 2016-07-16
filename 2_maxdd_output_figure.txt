@@ -1,20 +1,6 @@
 jmervine@laptop:~/tmp $ MAXCDN_ALIAS=XXXXX MAXCDN_KEY=XXXXX MAXCDN_SECRET=XXXXX node maxdd.js
-{ status: 
-   [ { status_code: '301',
-       hit: '0',
-       definition: 'Moved Permanently',
-       timestamp: '2016-05-08' },
-     { status_code: '404',
-       hit: '1',
-       definition: 'Not Found',
-       timestamp: '2016-05-08' },
-   // ... results omitted for brevity ...
-     { status_code: '301',
-       hit: '0',
-       definition: 'Moved Permanently',
-       timestamp: '2016-05-27' } ],
-  stats: 
-   { size: '10362832',
-     hit: '16211',
-     noncache_hit: '0',
-     cache_hit: '16211' } }
+{ size: '1648211801120',
+  hit: '62300158',
+  noncache_hit: '233710',
+  cache_hit: '62066448',
+  timestamp: '2016-07-13 04:00:00' }

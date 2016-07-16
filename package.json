@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "async": "^2.0.0-rc.6",
     "dogapi": "^2.3.0",
     "maxcdn": "^0.2.0"
   }
