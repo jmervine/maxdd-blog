@@ -8,14 +8,6 @@ const maxcdn  = require('maxcdn').create(
     process.env.MAXCDN_KEY,
     process.env.MAXCDN_SECRET);
 
-// Initialize Datadog lib
-const datadog = require("dogapi");
-
-datadog.initialize({
-    api_key: process.env.DATADOG_API_KEY,
-    app_key: process.env.DATADOG_APP_KEY
-});
-
 // Exec
 maxcdn.get(endpoint, function(error, results) {
     var onError = function(error) {
