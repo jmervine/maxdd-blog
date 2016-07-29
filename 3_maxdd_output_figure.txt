@@ -1,48 +1,23 @@
-jmervine@laptop:~/tmp $ MAXCDN_ALIAS=XXXXX MAXCDN_KEY=XXXXX MAXCDN_SECRET=XXXXX DATADOG_API_KEY=XXXXX DATADOG_APP_KEY=XXXXX node maxdd.js
+jmervine@laptop:~/tmp $ MAXCDN_ALIAS=XXXXX MAXCDN_KEY=XXXXX MAXCDN_SECRET=XXXXX node maxdd.js
 [
   {
     "metric": "maxcdn.bytes",
-    "points": [
-      [
-        1468531284,
-        1648211801120
-      ]
-    ]
+    "points": [ [ 1468531284, 1648211801120 ] ]
   },
   {
     "metric": "maxcdn.requests",
-    "points": [
-      [
-        1468531284,
-        62300158
-      ]
-    ]
+    "points": [ [ 1468531284, 62300158 ] ]
   },
   {
     "metric": "maxcdn.hits",
-    "points": [
-      [
-        1468531284,
-        62066448
-      ]
-    ]
+    "points": [ [ 1468531284, 62066448 ] ]
   },
   {
     "metric": "maxcdn.misses",
-    "points": [
-      [
-        1468531284,
-        233710
-      ]
-    ]
+    "points": [ [ 1468531284, 233710 ] ]
   },
   {
     "metric": "maxcdn.hit_percent",
-    "points": [
-      [
-        1468531284,
-        99.62486451478983
-      ]
-    ]
+    "points": [ [ 1468531284, 99.62486451478983 ] ]
   }
 ]
