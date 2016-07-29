@@ -68,7 +68,7 @@ function publishMetrics(metrics) {
 // Exec
 maxcdn.get(endpoint, function(error, results) {
     var onError = function(error) {
-        console.log('    ERROR: s', error.data);
+        console.log('ERROR: s', error.data);
         process.exit(error.statusCode);
     }
 
