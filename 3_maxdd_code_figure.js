@@ -8,14 +8,6 @@ const maxcdn  = require('maxcdn').create(
     process.env.MAXCDN_KEY,
     process.env.MAXCDN_SECRET);
 
-// Initialize Datadog lib
-const datadog = require("dogapi");
-
-datadog.initialize({
-    api_key: process.env.DATADOG_API_KEY,
-    app_key: process.env.DATADOG_APP_KEY
-});
-
 // Helper to format the metrics result set from MaxCDN for sending to Datadog
 function formatMetrics(results) {
     var now = parseInt(new Date().getTime() / 1000);
